@@ -45,6 +45,11 @@ app.post('/todos', (req, res) => {
   return todo.save().then(() => res.redirect('/')).catch(error => console.log(error))
 })
 
+app.get('/todos/:id', (req, res) => {
+  const id = req.params.id
+  return Todo.findById(id).lean().then(todo => res.render('detail', { todo })).catch(erorr => console.log(error))
+})
+
 app.listen(3000, () => {
   console.log('app is running on port 3000')
 })
